@@ -18,6 +18,9 @@ const compareEntries = (
   if (mapA.size !== mapB.size) {
     return false
   }
+  if (mapA.size === 0) {
+    return true
+  }
   for (const [key, value] of mapA) {
     if (!mapB.has(key) || !Object.is(value, mapB.get(key))) {
       return false
@@ -31,6 +34,11 @@ const compareIterables = (
   valueA: Iterable<unknown>,
   valueB: Iterable<unknown>,
 ) => {
+  if (Array.isArray(valueA) && Array.isArray(valueB)) {
+    if (valueA.length !== valueB.length) {
+      return false
+    }
+  }
   const iteratorA = valueA[Symbol.iterator]()
   const iteratorB = valueB[Symbol.iterator]()
   let nextA = iteratorA.next()
