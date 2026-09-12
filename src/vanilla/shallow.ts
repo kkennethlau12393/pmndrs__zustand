@@ -18,6 +18,9 @@ const compareEntries = (
   if (mapA.size !== mapB.size) {
     return false
   }
+  if (mapA.size === 0) {
+    return true
+  }
   for (const [key, value] of mapA) {
     if (!mapB.has(key) || !Object.is(value, mapB.get(key))) {
       return false
