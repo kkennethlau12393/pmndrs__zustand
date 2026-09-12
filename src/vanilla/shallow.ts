@@ -34,6 +34,11 @@ const compareIterables = (
   valueA: Iterable<unknown>,
   valueB: Iterable<unknown>,
 ) => {
+  if (Array.isArray(valueA) && Array.isArray(valueB)) {
+    if (valueA.length !== valueB.length) {
+      return false
+    }
+  }
   const iteratorA = valueA[Symbol.iterator]()
   const iteratorB = valueB[Symbol.iterator]()
   let nextA = iteratorA.next()
